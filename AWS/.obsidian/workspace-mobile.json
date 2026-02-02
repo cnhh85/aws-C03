@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Serverless Overview.md",
+                "file": "Amazon S3 – Security.md",
                 "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Serverless Overview"
+              "title": "Amazon S3 – Security"
             }
           }
         ]
@@ -49,7 +49,7 @@
         "state": {
           "type": "search",
           "state": {
-            "query": "",
+            "query": "VPC",
             "matchingCase": false,
             "explainSearch": false,
             "collapseAll": false,
@@ -100,7 +100,7 @@
         }
       }
     ],
-    "currentTab": 0
+    "currentTab": 1
   },
   "right": {
     "id": "43429a97af3f5613",
@@ -167,6 +167,7 @@
   },
   "active": "1158fa5bf7228a87",
   "lastOpenFiles": [
+    "Serverless Overview.md",
     "Amazon Route 53.md",
     "archived/GOALS.md",
     "Amazon S3 - Basic.md",
