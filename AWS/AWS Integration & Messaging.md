@@ -1,0 +1,320 @@
+# AWS Integration & Messaging
+
+> SQS, SNS & Kinesis
+
+## Section Introduction
+
+- When we start deploying multiple applications, they will inevitably need to communicate with one another
+- There are two patterns of application communication
+
+  ---
+
+- Synchronous between applications can be problematic if there are sudden spikes in traffic
+- What if you need to suddenly encode 1000 videos, but usually it’s 10?
+
+  ---
+
+- In that case, it’s better to **decouple** your applications,
+  - using SQS: queue model
+  - using SNS: pub/sub model
+  - using Kinesis: real-time streaming model
+- These services can scale independently from our application!
+
+## Amazon SQS
+
+### Amazon SQS – Standard Queue
+
+- Oldest offering (over 10 years old)
+- Fully managed service, used to decouple applications
+
+  ---
+
+- Attributes:
+  - Unlimited throughput, unlimited number of messages in queue
+  - Default retention of messages: 4 days, maximum of 14 days
+  - Low latency (<10 ms on publish and receive)
+  - Limitation of 256KB per message sent
+
+  ---
+
+- Can have duplicate messages (at least once delivery, occasionally)
+- Can have out-of-order messages (best effort ordering)
+
+### SQS – Producing Messages
+
+- Produced to SQS using the SDK (SendMessage API)
+- The message is **persisted** in SQS until a consumer deletes it
+- Message retention: default 4 days, up to 14 days
+
+  ---
+
+- Example: send an order to be processed
+- Order id
+- Customer id
+- Any attributes you want
+
+> SQS standard: unlimited throughput
+
+### SQS – Consuming Messages
+
+- Consumers (running on EC2 instances, servers, or AWS Lambda)…
+- Poll SQS for messages (receive up to 10 messages at a time)
+- Process the messages (example: insert the message into an RDS database)
+- Delete the messages using the DeleteMessage API
+
+### SQS – Multiple EC2 Instances Consumers
+
+- Consumers receive and process messages in parallel
+- At least once delivery
+- Best-effort message ordering
+- Consumers delete messages after processing them
+- We can scale consumers horizontally to improve throughput of processing
+
+### SQS with Auto Scaling Group (ASG)
+
+![[Pasted image 20260129211821.png]]
+
+### SQS to decouple between application tiers
+
+![[Pasted image 20260129211835.png]]
+
+### Amazon SQS - Security
+
+- **Encryption**:
+  - In-flight encryption using HTTPS API
+  - At-rest encryption using KMS keys
+  - Client-side encryption if the client wants to perform encryption/decryption itself
+
+  ---
+
+- **Access Controls**: IAM policies to regulate access to the SQS API
+
+  ---
+
+- **SQS Access Policies** (similar to S3 bucket policies)
+  - Useful for cross-account access to SQS queues
+  - Useful for allowing other services (SNS, S3…) to write to an SQS queue
+
+### SQS – Message Visibility Timeout
+
+- After a message is polled by a consumer, it becomes invisible to other consumers
+- By default, the “message visibility timeout” is **30 seconds**
+- That means the message has 30 seconds to be processed
+- After the message visibility timeout is over, the message is “visible” in SQS
+
+![[Pasted image 20260129212000.png]]
+
+- If a message is not processed within the visibility timeout, it will be processed twice
+- A consumer could call the **ChangeMessageVisibility** API to get more time
+- If the visibility timeout is high (hours), and the consumer crashes, re-processing will take time
+- If the visibility timeout is too low (seconds), we may get duplicates
+
+### Amazon SQS - Long Polling
+
+- When a consumer requests messages from the queue, it can optionally “wait” for messages to arrive if there are none in the queue
+- This is called Long Polling
+- **LongPolling decreases the number of API calls made to SQS while increasing the efficiency and reducing latency of your application**
+- The wait time can be between 1 sec and 20 sec (20 sec preferable)
+- Long Polling is preferable to Short Polling
+- Long polling can be enabled at the queue level or at the API level using **WaitTimeSeconds** 
+
+![[Pasted image 20260129212108.png | 200]]
+
+### Amazon SQS – FIFO Queue
+
+- FIFO = First In First Out (ordering of messages in the queue)
+
+![[Pasted image 20260129212236.png]]
+
+- Limited throughput: 300 msg/s without batching, 3000 msg/s with
+- Exactly-once send capability (by removing duplicates using Deduplication ID)
+- Messages are processed in order by the consumer
+- **Ordering** by Message Group ID (all messages in the same group are ordered) – mandatory parameter
+
+### SQS as a buffer to database writes
+
+> If the load is too big, some transactions may be lost
+
+![[Pasted image 20260129212337.png]]
+
+## Amazon SNS
+
+> What if you want to send one message to many receivers?
+
+![[Pasted image 20260129212526.png]]
+
+- The “event producer” only sends message to one SNS topic
+- As many “event receivers” (subscriptions) as we want to listen to the SNS topic notifications
+- Each subscriber to the topic will get all the messages (note: new feature to filter messages)
+- Up to 12,500,000 subscriptions per topic
+- 100,000 topics limit
+
+> SNS integrates with a lot of AWS services
+> Many AWS services can send data directly to SNS for notifications
+
+### Amazon SNS – How to publish
+
+- Topic Publish (using the SDK)
+  - Create a topic
+  - Create a subscription (or many)
+  - Publish to the topic
+
+  ---
+
+- Direct Publish (for mobile apps SDK)
+  - Create a platform application
+  - Create a platform endpoint
+  - Publish to the platform endpoint
+  - Works with Google GCM, Apple APNS, Amazon ADM…
+
+### Amazon SNS – Security
+
+- **Encryption**:
+  - In-flight encryption using HTTPS API
+  - At-rest encryption using KMS keys
+  - Client-side encryption if the client wants to perform encryption/decryption itself
+
+  ---
+
+- **Access Controls**: IAM policies to regulate access to the SNS API
+
+  ---
+
+- **SNS Access Policies** (similar to S3 bucket policies)
+  - Useful for cross-account access to SNS topics
+  - Useful for allowing other services ( S3…) to write to an SNS topic
+
+### SNS + SQS: Fan Out
+
+![[Pasted image 20260129215222.png]]
+
+- Push once in SNS, receive in all SQS queues that are subscribers
+- Fully decoupled, no data loss
+- SQS allows for: data persistence, delayed processing and retries of work
+- Ability to add more SQS subscribers over time
+- Make sure your SQS queue **access policy** allows for SNS to write
+- Cross-Region Delivery: works with SQS Queues in other regions
+
+### Application: S3 Events to multiple queues
+
+- For the same combination of **event type** (e.g. object create) and prefix (e.g. images/), you can only have `one S3 Event rule`
+- If you want to send the same S3 event to many SQS queues, use fan-out
+
+![[Pasted image 20260129215313.png]]
+
+### Application: SNS to Amazon S3 through - Kinesis Data Firehose
+
+> SNS can send to Kinesis, and therefore, we can have the following solution architecture:
+
+![[Pasted image 20260129215346.png]]
+
+### Amazon SNS – FIFO Topic
+
+![[Pasted image 20260129215422.png]]
+
+- FIFO = First In First Out (ordering of messages in the topic)
+- Similar features to SQS FIFO:
+  - Ordering by Message Group ID (all messages in the same group are ordered)
+  - Deduplication using a Deduplication ID or Content-Based Deduplication
+- Can have SQS Standard and FIFO queues as subscribers
+- Limited throughput (same throughput as SQS FIFO)
+
+### SNS FIFO + SQS FIFO: Fan Out
+
+> In case you need fan out + ordering + deduplication
+
+![[Pasted image 20260129215451.png]]
+
+### SNS – Message Filtering
+
+- JSON policy used to filter messages sent to SNS topic’s subscriptions
+- If a subscription doesn’t have a filter policy, it receives every message
+
+![[Pasted image 20260129215521.png]]
+
+## Amazon Kinesis Data Streams
+
+> Collect and store streaming data in real-time
+
+![[Pasted image 20260129215544.png]]
+
+- Retention between up to 365 days
+- Ability to reprocess (replay) data by consumers
+- Data can’t be deleted from Kinesis (until it expires)
+- Data up to 1MB (typical use case is a lot of “small” **real-time data**)
+- Data ordering guarantee for data with the same “Partition ID”
+- At-rest KMS encryption, in-flight HTTPS encryption
+- Kinesis Producer Library (KPL) to write an optimised producer application
+- Kinesis Client Library (KCL) to write an optimised consumer application
+
+### Kinesis Data Streams – Capacity Modes
+
+- **Provisioned mode**:
+  - Choose the number of shards
+  - Each shard gets 1MB/s in (or 1000 records per second)
+  - Each shard gets 2MB/s out
+  - Scale manually to increase or decrease the number of shards
+  - You pay per shard provisioned per hour
+
+  ---
+
+- **On-demand mode**:
+  - No need to provision or manage the capacity
+  - Default capacity provisioned (4 MB/s in or 4000 records per second)
+  - Scales automatically based on the observed throughput peak during the last 30 days
+  - Pay per stream per hour & data in/out per GB
+
+## Amazon Data Firehose
+
+![[Pasted image 20260129215708.png]]
+
+> Note: used to be called “Kinesis Data Firehose”
+
+- Fully Managed Service
+  - Amazon Redshift / Amazon S3 / Amazon OpenSearch Service
+  - 3rd party: Splunk / MongoDB / Datadog / NewRelic / …
+  - Custom HTTP Endpoint
+- Automatic scaling, serverless, pay for what you use
+- **Near Real-Time** with buffering capability based on size/time
+- Supports CSV, JSON, Parquet, Avro, Raw Text, and Binary data
+- Conversions to Parquet / ORC, compressions with gzip / snappy
+- Custom data transformations using AWS Lambda (e.g CSV to JSON)
+
+## Kinesis Data Streams vs Amazon Data Firehose
+
+
+| Kinesis Data Streams         | Amazon Data Firehose                                                          |
+| ---------------------------- | ----------------------------------------------------------------------------- |
+| Streaming data collection    | Load streaming data into S3 / Redshift / OpenSearch / 3rd party / custom HTTP |
+| Producer & Consumer code     | Fully managed                                                                 |
+| Real-time                    | Near real-time                                                                |
+| Provisioned / On-Demand mode | Automatic scaling                                                             |
+| Data storage up to 365 days  | No data storage                                                               |
+| Replay Capability            | Doesn’t support replay capability                                             |
+
+## SQS vs SNS vs Kinesis
+
+
+| SQS                                                                                                                                                                                                                                              | SNS                                                                                                                                                                                                                                                                                          | Kinesis                                                                                                                                                                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| • Consumer “pull data”<br>• Data is deleted after being consumed<br>• Can have as many workers (consumers) as we want<br>• No need to provision throughput<br>• Ordering guarantees only on FIFO queues<br>• Individual message delay capability | • Push data to many subscribers<br>• Up to 12,500,000 subscribers<br>• Data is not persisted (lost if not delivered)<br>• Pub/Sub<br>• Up to 100,000 topics<br>• No need to provision throughput<br>• Integrates with SQS for fan-out architecture pattern<br>• FIFO capability for SQS FIFO | • Standard: pull data<br>    • 2 MB per shard<br>• Enhanced-fan out: push data<br>    • 2 MB per shard per consumer<br>• Possibility to replay data<br>• Meant for real-time big data, analytics and ETL<br>• Ordering at the shard level<br>• Data expires after X days<br>• Provisioned mode or on- demand capacity mode |
+
+## Amazon MQ
+
+- SQS, SNS are “cloud-native” services: proprietary protocols from AWS
+- Traditional applications running from on-premises may use open protocols such as: MQTT, AMQP, STOMP, Openwire, WSS
+- **When migrating to the cloud**, instead of re-engineering the application to use SQS and SNS, we can use Amazon MQ
+
+  ---
+
+- **Amazon MQ is a managed message broker service for RabbitMQ // ActiveMQ**
+
+  ---
+
+- Amazon MQ doesn’t “scale” as much as SQS / SNS
+- Amazon MQ runs on servers, can run in Multi-AZ with failover
+- Amazon MQ has both queue feature (~SQS) and topic features (~SNS)
+
+### Amazon MQ – High Availability
+
+![[Pasted image 20260129220501.png]]
