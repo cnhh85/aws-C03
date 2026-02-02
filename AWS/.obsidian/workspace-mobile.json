@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Amazon S3 – Security.md",
+                "file": "51. Amazon VPC.md",
                 "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Amazon S3 – Security"
+              "title": "51. Amazon VPC"
             }
           }
         ]
@@ -49,7 +49,7 @@
         "state": {
           "type": "search",
           "state": {
-            "query": "VPC",
+            "query": "",
             "matchingCase": false,
             "explainSearch": false,
             "collapseAll": false,
@@ -100,7 +100,7 @@
         }
       }
     ],
-    "currentTab": 1
+    "currentTab": 0
   },
   "right": {
     "id": "43429a97af3f5613",
@@ -167,6 +167,8 @@
   },
   "active": "1158fa5bf7228a87",
   "lastOpenFiles": [
+    "52. Disaster Recovery & Migrations.md",
+    "Amazon S3 – Security.md",
     "Serverless Overview.md",
     "Amazon Route 53.md",
     "archived/GOALS.md",

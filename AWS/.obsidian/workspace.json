@@ -8,112 +8,40 @@
         "type": "tabs",
         "children": [
           {
-            "id": "539354eb2fe7e610",
+            "id": "650be6d3fc574aea",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Machine Learning.md",
+                "file": "26. AWS Security & Encryption.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Machine Learning"
-            }
-          },
-          {
-            "id": "46eb6a7102bea153",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Amazon Route 53.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Amazon Route 53"
-            }
-          },
-          {
-            "id": "d2c024cb66230de1",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "50. Advanced Identity in AWS.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "50. Advanced Identity in AWS"
-            }
-          },
-          {
-            "id": "1c347bec12057cff",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "51. Amazon VPC.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "51. Amazon VPC"
-            }
-          },
-          {
-            "id": "dcf30b624c32da61",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "52. Disaster Recovery & Migrations.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "52. Disaster Recovery & Migrations"
+              "title": "26. AWS Security & Encryption"
             }
           }
-        ],
-        "currentTab": 4
+        ]
       },
       {
         "id": "99921f99b422ae81",
         "type": "tabs",
         "children": [
           {
-            "id": "2874334ffcc996ac",
+            "id": "a963b29e4fe18dbb",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "AWS Monitoring, Audit and Performance.md",
+                "file": "26. AWS Security & Encryption.md",
                 "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "AWS Monitoring, Audit and Performance"
-            }
-          },
-          {
-            "id": "cc3a65d90e6f95fd",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "51. Amazon VPC.md",
-                "mode": "preview",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "51. Amazon VPC"
+              "title": "26. AWS Security & Encryption"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -132,7 +60,7 @@
             "state": {
               "type": "file-explorer",
               "state": {
-                "sortOrder": "byCreatedTimeReverse",
+                "sortOrder": "alphabetical",
                 "autoReveal": false
               },
               "icon": "lucide-folder-closed",
@@ -170,7 +98,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 308.5
+    "width": 285.5
   },
   "right": {
     "id": "4cdcd79cd71e8b91",
@@ -276,38 +204,40 @@
       "bases:Create new base": false
     }
   },
-  "active": "dcf30b624c32da61",
+  "active": "650be6d3fc574aea",
   "lastOpenFiles": [
-    "51. Amazon VPC.md",
+    "images/Pasted image 20260203011424.png",
+    "images/Pasted image 20260203011241.png",
+    "images/Pasted image 20260203010919.png",
+    "images/Pasted image 20260203010828.png",
+    "images/Pasted image 20260203010534.png",
+    "images/Pasted image 20260203010311.png",
+    "images/Pasted image 20260203010045.png",
+    "images/Pasted image 20260203010033.png",
+    "images/Pasted image 20260203005815.png",
+    "images/Pasted image 20260203005738.png",
+    "images/Pasted image 20260203005653.png",
+    "25. Advanced Identity in AWS.md",
+    "26. AWS Security & Encryption.md",
     "52. Disaster Recovery & Migrations.md",
-    "images/Pasted image 20260203002100.png",
-    "images/Pasted image 20260203002016.png",
-    "images/Pasted image 20260203001927.png",
-    "images/Pasted image 20260203001842.png",
-    "images/Pasted image 20260203001752.png",
-    "images/Pasted image 20260203001519.png",
-    "images/Pasted image 20260203001459.png",
-    "images/Pasted image 20260203001343.png",
-    "images/Pasted image 20260203001236.png",
-    "images/Pasted image 20260203001007.png",
-    "50. Advanced Identity in AWS.md",
-    "Amazon Route 53.md",
-    "AWS Monitoring, Audit and Performance.md",
-    "archived/GOALS.md",
-    "Machine Learning.md",
-    "Serverless Overview.md",
-    "Data & Analytics.md",
-    "AWS Storage Extras.md",
-    "Databases in AWS.md",
-    "Containers on AWS.md",
-    "AWS Integration & Messaging.md",
-    "CloudFront & Global Accelerator.md",
-    "Amazon S3 – Security.md",
-    "Amazon S3 – Advanced.md",
-    "Amazon S3 - Basic.md",
-    "RDS, Aurora & ElastiCache.md",
+    "51. Amazon VPC.md",
+    "19. Serverless Overview.md",
+    "7. RDS, Aurora & ElastiCache.md",
     "RANDOM.md",
-    "ELB.md",
+    "23. Machine Learning.md",
+    "8. ELB.md",
+    "21. Databases in AWS.md",
+    "22. Data & Analytics.md",
+    "18. Containers on AWS.md",
+    "15. CloudFront & Global Accelerator.md",
+    "16. AWS Storage Extras.md",
+    "24. AWS Monitoring, Audit and Performance.md",
+    "17. AWS Integration & Messaging.md",
+    "14. Amazon S3 – Security.md",
+    "13. Amazon S3 – Advanced.md",
+    "12. Amazon S3 - Basic.md",
+    "10. Amazon Route 53.md",
+    "archived/GOALS.md",
     "images",
     "Amazon S3.md",
     "archived",
