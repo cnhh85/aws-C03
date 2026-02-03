@@ -8,20 +8,69 @@
         "type": "tabs",
         "children": [
           {
-            "id": "f133f4c30b44b8d2",
+            "id": "5ff5ea779bde7c75",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "18. Containers on AWS.md",
+                "file": "28. Disaster Recovery & Migrations.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "28. Disaster Recovery & Migrations"
+            }
+          }
+        ]
+      },
+      {
+        "id": "7518fb097935ab8a",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "4dd3b2336a70d0b8",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "27. Amazon VPC.md",
                 "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "18. Containers on AWS"
+              "title": "27. Amazon VPC"
+            }
+          },
+          {
+            "id": "b89c6828891009e8",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "25. Advanced Identity in AWS.md",
+                "mode": "preview",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "25. Advanced Identity in AWS"
+            }
+          },
+          {
+            "id": "167e7643738d7f37",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "28. Disaster Recovery & Migrations.md",
+                "mode": "preview",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "28. Disaster Recovery & Migrations"
             }
           }
-        ]
+        ],
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -74,8 +123,7 @@
               "title": "Bookmarks"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "horizontal",
@@ -185,19 +233,31 @@
       "bases:Create new base": false
     }
   },
-  "active": "f133f4c30b44b8d2",
+  "active": "5ff5ea779bde7c75",
   "lastOpenFiles": [
+    "images/Pasted image 20260204020447.png",
+    "images/Pasted image 20260204020427.png",
+    "images/Pasted image 20260204020332.png",
+    "images/Pasted image 20260204020307.png",
+    "images/Pasted image 20260204020146.png",
+    "images/Pasted image 20260204020100.png",
+    "images/Pasted image 20260204020015.png",
+    "images/Pasted image 20260204015950.png",
+    "images/Pasted image 20260204015925.png",
+    "images/Pasted image 20260204015748.png",
+    "images/Pasted image 20260204015658.png",
+    "25. Advanced Identity in AWS.md",
+    "27. Amazon VPC.md",
+    "18. Containers on AWS.md",
     "24. AWS Monitoring, Audit and Performance.md",
     "10. Amazon Route 53.md",
     "16. AWS Storage Extras.md",
-    "25. Advanced Identity in AWS.md",
     "17. AWS Integration & Messaging.md",
     "22. Data & Analytics.md",
     "12. Amazon S3 - Basic.md",
     "13. Amazon S3 – Advanced.md",
     "14. Amazon S3 – Security.md",
     "21. Databases in AWS.md",
-    "27. Amazon VPC.md",
     "26. AWS Security & Encryption.md",
     "19. Serverless Overview.md",
     "4. IAM and AWS CLI.md",
@@ -205,24 +265,12 @@
     "6. Amazon EC2 – Associate.md",
     "8. ELB.md",
     "99. VPC bonus - Vietnamese.md",
-    "images/Pasted image 20260203023500.png",
-    "images/Pasted image 20260203023421.png",
-    "images/Pasted image 20260203023352.png",
-    "images/Pasted image 20260203023240.png",
-    "images/Pasted image 20260203023020.png",
-    "images/Pasted image 20260203022927.png",
-    "images/Pasted image 20260203022830.png",
-    "images/Pasted image 20260203022658.png",
-    "images/Pasted image 20260203022618.png",
-    "images/Pasted image 20260203022558.png",
     "28. Disaster Recovery & Migrations.md",
     "29. Disaster Recovery & Migrations.md",
     "7. Instance storages.md",
     "5. EC2 fundamentals.md",
     "52. Disaster Recovery & Migrations.md",
     "51. Amazon VPC.md",
-    "RANDOM.md",
-    "23. Machine Learning.md",
     "images",
     "archived"
   ]
