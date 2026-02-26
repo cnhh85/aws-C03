@@ -13,28 +13,15 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "27. Amazon VPC.md",
+                "file": "SSA/18. Containers on AWS.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "27. Amazon VPC"
-            }
-          },
-          {
-            "id": "a1bf73a4f911a65d",
-            "type": "leaf",
-            "state": {
-              "type": "release-notes",
-              "state": {
-                "currentVersion": "1.11.7"
-              },
-              "icon": "lucide-book-up",
-              "title": "Release Notes 1.11.7"
+              "title": "18. Containers on AWS"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -197,35 +184,36 @@
       "bases:Create new base": false
     }
   },
-  "active": "7829d2523b523ddf",
+  "active": "1a55493ea2f729b0",
   "lastOpenFiles": [
-    "19. Serverless Overview.md",
-    "23. Machine Learning.md",
-    "10. Amazon Route 53.md",
+    "SSA/13. Amazon S3 – Advanced.md",
+    "SSA/4. IAM and AWS CLI.md",
+    "SSA/5. EC2 fundamentals.md",
+    "SSA/27. Amazon VPC.md",
+    "SSA",
+    "SSA/19. Serverless Overview.md",
+    "SSA/23. Machine Learning.md",
+    "SSA/10. Amazon Route 53.md",
     "test",
-    "26. AWS Security & Encryption.md",
-    "30. Other Services.md",
-    "13. Amazon S3 – Advanced.md",
-    "29. More Solutions Architecture.md",
-    "27. Amazon VPC.md",
-    "8. ELB.md",
-    "14. Amazon S3 – Security.md",
-    "12. Amazon S3 - Basic.md",
-    "17. AWS Integration & Messaging.md",
-    "16. AWS Storage Extras.md",
-    "25. Advanced Identity in AWS.md",
-    "28. Disaster Recovery & Migrations.md",
-    "22. Data & Analytics.md",
-    "18. Containers on AWS.md",
-    "7. Instance storages.md",
-    "9. RDS, Aurora & ElastiCache.md",
-    "99. VPC bonus - Vietnamese.md",
-    "15. CloudFront & Global Accelerator.md",
-    "24. AWS Monitoring, Audit and Performance.md",
-    "RANDOM.md",
-    "5. EC2 fundamentals.md",
-    "21. Databases in AWS.md",
-    "6. Amazon EC2 – Associate.md",
+    "SSA/26. AWS Security & Encryption.md",
+    "SSA/30. Other Services.md",
+    "SSA/29. More Solutions Architecture.md",
+    "SSA/8. ELB.md",
+    "SSA/14. Amazon S3 – Security.md",
+    "SSA/12. Amazon S3 - Basic.md",
+    "SSA/17. AWS Integration & Messaging.md",
+    "SSA/16. AWS Storage Extras.md",
+    "SSA/25. Advanced Identity in AWS.md",
+    "SSA/28. Disaster Recovery & Migrations.md",
+    "SSA/22. Data & Analytics.md",
+    "SSA/18. Containers on AWS.md",
+    "SSA/7. Instance storages.md",
+    "SSA/9. RDS, Aurora & ElastiCache.md",
+    "SSA/99. VPC bonus - Vietnamese.md",
+    "SSA/15. CloudFront & Global Accelerator.md",
+    "SSA/24. AWS Monitoring, Audit and Performance.md",
+    "SSA/RANDOM.md",
+    "SSA/21. Databases in AWS.md",
     "images/Pasted image 20260205014102.png",
     "images/Pasted image 20260204220738.png",
     "images/Pasted image 20260204220640.png",
